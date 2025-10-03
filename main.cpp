@@ -126,7 +126,7 @@ void NikanorSays(const std::string& message, const std::string& artPath = "ascii
 
     std::cout << "               " << spacesForBackslash << "\\" << std::endl;
 
-    // Выводим ASCII арт из указанного файла
+    // ASCII арт из указанного файла
     std::ifstream file(artPath);
     if (file.is_open()) {
         std::string line;
@@ -155,11 +155,11 @@ int main(int argc, char* argv[]) {
 
     const char* username = std::getenv("USER");
     std::string message;
-    std::string artPath = "/home/" + std::string(username) + "/asciinikanor.txt"; // путь по умолчанию
+    std::string artPath = "/home/" + std::string(username) + "/asciinikanor.txt"; // путь по умолчанию (вообще это только на моей машине будет работать, я что еблан?)
 
     // Обработка аргументов командной строки
     if (argc == 1) {
-        // Если аргументов нет - интерактивный режим
+        // аргументов нет - интерактивный режим
         std::cout << "Введите сообщение: ";
         std::getline(std::cin, message);
         std::cout << "Введите путь к ASCII арту (или Enter для значения по умолчанию): ";
@@ -170,22 +170,21 @@ int main(int argc, char* argv[]) {
         }
     }
     else if (argc == 2) {
-        // Один аргумент - только сообщение
+        // один аргумент - только сообщение
         message = argv[1];
     }
+    // два аргумента - сообщение и путь к ascii
     else if (argc == 3) {
-        // Два аргумента - сообщение и путь к арту
         message = argv[1];
         artPath = argv[2];
     }
     else {
-        // Слишком много аргументов
         std::cerr << "Ошибка: слишком много аргументов!" << std::endl;
         showUsage(argv[0]);
         return 1;
     }
 
-    // Проверяем, не запрашивается ли помощь
+    // Проверка помощи
     if (message == "-h" || message == "--help") {
         showUsage(argv[0]);
         return 0;
